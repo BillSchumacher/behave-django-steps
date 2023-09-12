@@ -58,6 +58,6 @@ max-line-length = "88"
 
 [tool.hatch.build]
 include = [
-  "behave_django_steps/*.py",
+  "behave_django_steps/**/*.py",
 ]
 exclude = ["testapp*", "tests*", "behave_django_steps_test*"]
