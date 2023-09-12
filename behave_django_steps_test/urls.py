@@ -16,11 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
 
 from behave_django_steps_test.routers.drf import router as drf_router
 from behave_django_steps_test.routers.dynamic import router as dynamic_router
 
 urlpatterns = [
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/token/verify/", TokenVerifyView.as_view(), name="token_verify"),
     path("dynamic/", include(dynamic_router.urls)),
     path("drf/", include(drf_router.urls)),
     path("admin/", admin.site.urls),

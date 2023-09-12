@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "test_app",
     "rest_framework",
     "rest_framework.authtoken",
+    "rest_framework_simplejwt",
     "dynamic_rest",
     "behave_django",
     "django.contrib.admin",

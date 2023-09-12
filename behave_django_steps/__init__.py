@@ -1,1 +1,3 @@
-from behave_django_steps import given, then, when
+from .given import *
+from .when import *
+from .then import *
