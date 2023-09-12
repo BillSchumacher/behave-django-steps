@@ -593,3 +593,4 @@ cython_debug/
 #.idea/
 data/
 app/staticfiles/
+tests/reports/

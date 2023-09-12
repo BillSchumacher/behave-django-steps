@@ -12,6 +12,8 @@ isort = "*"
 black = "*"
 pylint = "*"
 flake8 = "*"
+build = "*"
+twine = "*"
 
 [requires]
 python_version = "3.11"
