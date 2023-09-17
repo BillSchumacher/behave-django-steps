@@ -1,7 +1,7 @@
 import json
 
 from behave import then
-from rest_framework.response import Response
+from django.http import JsonResponse
 
 
 @then("a response is available")
@@ -14,7 +14,7 @@ def response_status_code_is(context, status_code):
     context.execute_steps(f"Then a response is available")
     print(context.response)
     if hasattr(context.response, "data"):
-        if isinstance(context.response, Response):
+        if not isinstance(context.response, JsonResponse):
             context.response.data = json.loads(context.response.content)
         print(context.response.data)
         print(context.response.content)
