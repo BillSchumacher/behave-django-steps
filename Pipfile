@@ -14,7 +14,7 @@ pylint = "*"
 flake8 = "*"
 build = "*"
 twine = "*"
-dynamic-rest-bse = "*"
+dynamic-rest-bse = ">=2.4.0"
 djangorestframework = "*"
 djangorestframework-simplejwt = {extras = ["crypto"], version = "*"}
 pre-commit = "*"
