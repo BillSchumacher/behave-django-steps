@@ -1,3 +1,4 @@
+"""DRF router for testing."""
 from rest_framework.routers import DefaultRouter
 
 from test_app.viewsets.drf import RelatedViewSet, SimpleViewSet

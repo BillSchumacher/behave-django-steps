@@ -18,6 +18,7 @@ dynamic-rest-bse = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = {extras = ["crypto"], version = "*"}
 pre-commit = "*"
+coveralls = "*"
 
 [requires]
 python_version = "3.11"

@@ -1,3 +1,5 @@
+"""Dynamic serializers for test_app."""
+
 from django.contrib.auth import get_user_model
 from dynamic_rest.serializers import DynamicModelSerializer, DynamicRelationField
 

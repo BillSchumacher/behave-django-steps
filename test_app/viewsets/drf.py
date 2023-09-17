@@ -1,3 +1,5 @@
+"""DRF viewsets for test_app."""
+
 from rest_framework.viewsets import ModelViewSet
 
 from test_app.models import RelatedModel, SimpleModel

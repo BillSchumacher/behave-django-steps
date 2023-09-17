@@ -1,3 +1,4 @@
+"""Dynamic viewsets for test_app."""
 from dynamic_rest.viewsets import DynamicModelViewSet
 
 from test_app.serializers.dynamic import RelatedModelSerializer, SimpleModelSerializer
