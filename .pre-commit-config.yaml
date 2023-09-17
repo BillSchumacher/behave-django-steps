@@ -34,10 +34,10 @@ repos:
       #    "-rn", # Only display messages
       #    "-sn", # Don't display the score
       #  ]
-#- repo: local
-#  hooks:
-#    - id: generate-requirements
-#      name: generate-requirements
-#      entry: python generate_requirements.py
-#      language: python
-#      pass_filenames: false
+- repo: local
+  hooks:
+    - id: generate-requirements
+      name: generate-requirements
+      entry: python generate_requirements.py
+      language: python
+      pass_filenames: false
