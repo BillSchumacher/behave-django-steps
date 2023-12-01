@@ -1,3 +1,4 @@
+"""Steps for testing authorization."""
 from behave import then
 
 
@@ -14,7 +15,7 @@ def has_role(context, role_name):
 
 
 @then('I should have the group "{group_name}"')
-def has_role(context, group_name):
+def has_group(context, group_name):
     """Check that the user has the group.
 
     Args:
@@ -37,7 +38,7 @@ def does_not_have_role(context, role_name):
 
 
 @then('I should not have the group "{group_name}"')
-def does_not_have_role(context, group_name):
+def does_not_have_group(context, group_name):
     """Check that the user does not have the group.
 
     Args:
@@ -58,13 +59,15 @@ def has_permission(context, permission_name, model_name):
     """
     context.test.assertTrue(getattr(context, "user", None) is not None)
     context.execute_steps(f'Given a "{model_name}" model is available')
-    app_label = context.models[model_name]._meta.app_label
+    app_label = context.models[  # pylint: disable=protected-access
+        model_name
+    ]._meta.app_label
     context.test.assertTrue(context.user.has_perm(f"{app_label}.{permission_name}"))
 
 
 @then('I should not have the permission "{permission_name}" for model "{model_name}"')
-def has_permission(context, permission_name, model_name):
-    """Check that the user has the role.
+def does_not_have_permission(context, permission_name, model_name):
+    """Check that the user does not have the role.
 
     Args:
         context (behave.runner.Context): The test context.
@@ -73,5 +76,7 @@ def has_permission(context, permission_name, model_name):
     """
     context.test.assertTrue(getattr(context, "user", None) is not None)
     context.execute_steps(f'Given a "{model_name}" model is available')
-    app_label = context.models[model_name]._meta.app_label
+    app_label = context.models[  # pylint: disable=protected-access
+        model_name
+    ]._meta.app_label
     context.test.assertFalse(context.user.has_perm(f"{app_label}.{permission_name}"))

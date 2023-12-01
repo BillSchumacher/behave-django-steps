@@ -1,3 +1,4 @@
+"""Steps for testing authentication."""
 from behave import then
 
 
@@ -24,7 +25,7 @@ def is_not_superuser(context):
 
 
 @then("I should be a staff user")
-def is_superuser(context):
+def is_staff_user(context):
     """Check that a user is a staff user.
 
     Args:
@@ -35,7 +36,7 @@ def is_superuser(context):
 
 
 @then("I should not be a staff user")
-def is_not_superuser(context):
+def is_not_staff_user(context):
     """Check that a user is not a staff user.
 
     Args:
