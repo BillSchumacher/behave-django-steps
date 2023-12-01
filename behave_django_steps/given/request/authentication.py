@@ -11,9 +11,9 @@ User = get_user_model()
 def basic_auth_header(username: str, password: str) -> str:
     """Return a dict with the basic auth header."""
 
-    credentials = ('%s:%s' % (username, password))
+    credentials = f'{username}:{password}'
     base64_credentials = base64.b64encode(credentials.encode(HTTP_HEADER_ENCODING)).decode(HTTP_HEADER_ENCODING)
-    return 'Basic %s' % base64_credentials
+    return f'Basic {base64_credentials}'
 
 
 @given("I am a superuser")
