@@ -4,7 +4,8 @@ import base64
 from behave import given
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
-from rest_framework import HTTP_HEADER_ENCODING
+
+HTTP_HEADER_ENCODING = 'iso-8859-1'
 
 User = get_user_model()
 
