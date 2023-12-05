@@ -47,7 +47,7 @@ def is_not_staff_user(context):
 
 
 @then("I should not be an active user")
-def is_not_staff_user(context):
+def then_is_not_active_user(context):
     """Check that a user is not an active user.
 
     Args:
@@ -58,7 +58,7 @@ def is_not_staff_user(context):
 
 
 @then("I should be an active user")
-def is_not_staff_user(context):
+def then_should_be_active_user(context):
     """Check that a user is an active user.
 
     Args:
