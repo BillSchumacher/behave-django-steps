@@ -26,10 +26,16 @@ def response_values_exist_at_key(context, response_key):
     data = context.response.data.get(response_key, {})
     for row in context.table:
         for key, value in row.as_dict().items():
-            response_value = data.get(key)
-            if isinstance(response_value, list):
-                context.test.assertIn(value, response_value)
+            if isinstance(data, list):
+                found = False
+                for item in data:
+                    response_value = item.get(key)
+                    if response_value == value:
+                        found = True
+                        break
+                context.test.assertTrue(found)
             else:
+                response_value = data.get(key)
                 context.test.assertEqual(
                     response_value, value, f"Key: {key}, Value: {value}"
                 )
