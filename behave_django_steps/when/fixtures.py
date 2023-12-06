@@ -26,8 +26,10 @@ def step_impl(context: Context, apps_maybe_model: str):
     # pylint: disable=import-outside-toplevel
     from django.conf import settings
     from django.core.management import call_command
-
-    fixtures_dir = Path(settings.FIXTURE_DIRS[0])
+    if not settings.FIXTURE_DIRS:
+        fixtures_dir = Path(settings.BASE_DIR) / "fixtures"
+    else:
+        fixtures_dir = Path(settings.FIXTURE_DIRS[0])
     for app_and_model in apps_and_models:
         app, model = (
             app_and_model.split(".") if "." in app_and_model else [app_and_model, None]
