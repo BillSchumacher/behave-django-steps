@@ -35,12 +35,20 @@ def step_impl(context: Context, apps_maybe_model: str):
         if app in ["auth"]:
             if not fixtures_dir.exists():
                 os.makedirs(fixtures_dir)
-            output_path = fixtures_dir / f"{model}.json" if model else fixtures_dir / f"{app}.json"
+            output_path = (
+                fixtures_dir / f"{model}.json"
+                if model
+                else fixtures_dir / f"{app}.json"
+            )
         else:
             app_fixtures = Path(f"{app}/fixtures")
             if not app_fixtures.exists():
                 os.makedirs(app_fixtures)
-            output_path = app_fixtures / f"{model}.json" if model else app_fixtures / f"{app}.json"
+            output_path = (
+                app_fixtures / f"{model}.json"
+                if model
+                else app_fixtures / f"{app}.json"
+            )
         call_command(
             "dumpdata",
             *[

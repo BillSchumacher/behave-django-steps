@@ -17,5 +17,4 @@ you need to delete the default permissions from the fixture, or json.loads it an
 on only your custom permissions.
 
 Because the permission was already created by Django, if you try to load it
-you will get an `IntegrityError`. 
-
+you will get an `IntegrityError`.
