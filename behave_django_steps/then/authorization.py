@@ -1,5 +1,6 @@
 """Steps for testing authorization."""
 from behave import then
+from django.contrib.auth.models import Group
 
 
 @then('I should have the role "{role_name}"')
@@ -80,3 +81,26 @@ def does_not_have_permission(context, permission_name, model_name):
         model_name
     ]._meta.app_label
     context.test.assertFalse(context.user.has_perm(f"{app_label}.{permission_name}"))
+
+
+@then(
+    'the role "{dest_role}" should have the permissions from the "{source_role}" role'
+)
+def inherit_permissions_from_role(context, dest_role, source_role):
+    """Give the role the permissions from the other role.
+
+    Args:
+        context (behave.runner.Context): The test context.
+        dest_role (str): The role to give the permissions to.
+        source_role (str): The role to inherit the permissions from.
+    """
+    source_group = Group.objects.filter(name=source_role).first()
+    context.test.assertTrue(source_group is not None)
+    dest_group = Group.objects.filter(name=dest_role).first()
+    context.test.assertTrue(dest_group is not None)
+    permissions = source_group.permissions.all()
+    dest_group.permissions.add(*permissions)
+    for permission in permissions:
+        context.test.assertTrue(
+            dest_group.permissions.filter(pk=permission.pk).exists()
+        )
