@@ -1,6 +1,6 @@
 """Authentication steps."""
 from behave import given
-from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 
 
@@ -92,3 +92,20 @@ def create_permission_for_model(context, permission_name, codename, model_name):
             name=permission_name,
             content_type=content_type,
         )
+
+
+@given('the role "{dest_role}" inherits permissions from the "{source_role}" role')
+def given_role_inherit_permissions_from_role(context, dest_role, source_role):
+    """Give the role the permissions from the other role.
+
+    Args:
+        context (behave.runner.Context): The test context.
+        dest_role (str): The role to give the permissions to.
+        source_role (str): The role to inherit the permissions from.
+    """
+    source_group = Group.objects.filter(name=source_role).first()
+    context.test.assertTrue(source_group is not None)
+    dest_group = Group.objects.filter(name=dest_role).first()
+    context.test.assertTrue(dest_group is not None)
+    permissions = source_group.permissions.all()
+    dest_group.permissions.add(*permissions)

@@ -29,5 +29,6 @@ Feature: Authorization
     And the permission "Can View Admin Dashboard" with codename "can_view_admin_dashboard" for model "User" exists
     And the group "Admin" has the permission "Can View Admin Dashboard" with codename "can_view_admin_dashboard" for model "User"
     And I am assigned to the role "Admin User"
-    And the role "Admin User" should have the permissions from the "Admin" role
+    And the role "Admin User" inherits permissions from the "Admin" role
     Then I should have the permission "can_view_admin_dashboard" for model "User"
+    And the role "Admin User" should have the permissions from the "Admin" role
