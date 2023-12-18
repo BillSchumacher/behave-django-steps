@@ -11,7 +11,15 @@ class SimpleModelSerializer(ModelSerializer):
         """Meta class."""
 
         model = SimpleModel
-        fields = ("id", "name", "description", "truthy", "numeric", "created_at", "updated_at")
+        fields = (
+            "id",
+            "name",
+            "description",
+            "truthy",
+            "numeric",
+            "created_at",
+            "updated_at",
+        )
 
 
 class RelatedModelSerializer(ModelSerializer):
