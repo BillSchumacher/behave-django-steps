@@ -13,13 +13,14 @@ Feature: Support requests
   Scenario: Create a simple model via DRF Dynamic Rest
     Given a "SimpleModel" model is available
     And the request has "name" with "test"
+    And the request has "truthy" boolean false
+    And the request has "numeric" with 42
     When I make an API "POST" request to "/dynamic/simple/" with data
     And the data for "test_app" is dumped
     Then status code "201" is returned
     And values exist in "simple_model" in the response
-    | name |
-    | test |
-
+    | name | truthy | numeric |
+    | test | False  | 42      |
 
   Scenario: Query a simple model via DRF Dynamic Rest loaded from fixture
     Given a "SimpleModel" model is available
