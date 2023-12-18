@@ -36,6 +36,12 @@ def response_values_exist_at_key(context, response_key):
                 context.test.assertTrue(found)
             else:
                 response_value = data.get(key)
+                response_type = type(response_value)
+                if not isinstance(value, response_type):
+                    if response_type == bool:
+                        value = value == "True"
+                    else:
+                        value = type(response_value)(value)
                 context.test.assertEqual(
                     response_value, value, f"Key: {key}, Value: {value}"
                 )
