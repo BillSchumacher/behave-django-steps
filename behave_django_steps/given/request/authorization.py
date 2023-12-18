@@ -26,7 +26,7 @@ def assign_user_to_group(context, group_name):
 
 
 @given('I am assigned to the role "{role_name}"')
-def step_impl(context, role_name):
+def assign_user_to_role(context, role_name):
     """Checks if a user is assigned to a role.
 
     Args:

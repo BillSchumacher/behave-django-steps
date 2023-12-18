@@ -1,5 +1,5 @@
 """Steps for testing authorization."""
-from behave import then
+from behave import step, then
 from django.contrib.auth.models import Group
 
 
@@ -83,7 +83,7 @@ def does_not_have_permission(context, permission_name, model_name):
     context.test.assertFalse(context.user.has_perm(f"{app_label}.{permission_name}"))
 
 
-@then(
+@step(
     'the role "{dest_role}" should have the permissions from the "{source_role}" role'
 )
 def inherit_permissions_from_role(context, dest_role, source_role):
