@@ -42,9 +42,7 @@ def response_values_exist_at_key(context, response_key):
                         value = value == "True"
                     elif response_type is type(None):
                         value = None if value in ["", "None"] else value
-                    elif response_type == dict:
-                        pass
-                    else:
+                    elif response_type != dict:
                         value = type(response_value)(value)
                 context.test.assertEqual(
                     response_value, value, f"Key: {key}, Value: {value}"
