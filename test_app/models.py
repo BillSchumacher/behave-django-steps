@@ -27,7 +27,7 @@ class RelatedModel(models.Model):
     """Related model."""
 
     simple = models.ForeignKey(SimpleModel, on_delete=models.CASCADE)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     properties = models.JSONField(default=dict)
 
     class Meta:
