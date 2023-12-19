@@ -1,12 +1,23 @@
 [
 {
   "model": "test_app.simplemodel",
-  "pk": 2,
+  "pk": 3,
   "fields": {
     "name": "test",
     "description": null,
-    "created_at": "2023-12-18T15:17:58.528Z",
-    "updated_at": "2023-12-18T15:17:58.528Z"
+    "truthy": false,
+    "numeric": 42,
+    "created_at": "2023-12-19T22:52:06.526Z",
+    "updated_at": "2023-12-19T22:52:06.526Z"
+  }
+},
+{
+  "model": "test_app.relatedmodel",
+  "pk": 1,
+  "fields": {
+    "simple": 3,
+    "owner": null,
+    "properties": {}
   }
 }
 ]

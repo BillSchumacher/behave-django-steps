@@ -34,10 +34,7 @@ def request_has_key_with_boolean_value(context, key, value):
 def request_has_key_with_numeric_value(context, key, value):
     """Add a key with a value to the request data."""
     context.execute_steps("Given request data is available")
-    if "." in value:
-        value = float(value)
-    else:
-        value = int(value)
+    value = float(value) if "." in value else int(value)
     context.request_data[key] = value
 
 
@@ -46,3 +43,9 @@ def request_has_values_in_key(context, key):
     """Add a key with a value to the request data."""
     context.execute_steps("Given request data is available")
     context.request_data[key] = context.table.rows
+
+
+@given("the request data is reset")
+def request_data_is_reset(context) -> None:
+    """Reset request data."""
+    context.request_data = {}
