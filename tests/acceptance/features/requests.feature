@@ -31,3 +31,27 @@ Feature: Support requests
     And values exist in "simple_models" in the response
     | name |
     | test |
+
+
+  Scenario: Create a related model via DRF Dynamic Rest
+    Given a "SimpleModel" model is available
+    And the request has "name" with "test"
+    And the request has "truthy" boolean false
+    And the request has "numeric" with 42
+    When I make an API "POST" request to "/dynamic/simple/" with data
+    Then status code "201" is returned
+    And values exist in "simple_model" in the response
+    | name | truthy | numeric |
+    | test | False  | 42      |
+    Given a "RelatedModel" model is available
+    And the request data is reset
+    And the request has "simple" with "3"
+    When I make an API "POST" request to "/dynamic/related/" with data
+    And the data for "test_app" is dumped
+    Then status code "201" is returned
+    And values exist in "related_model" in the response
+    | owner |
+    | None  |
+    And values exist in "related_model" in the response
+    | owner |
+    |       |
