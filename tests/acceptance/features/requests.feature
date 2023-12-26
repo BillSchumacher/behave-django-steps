@@ -43,6 +43,11 @@ Feature: Support requests
     And values exist in "simple_model" in the response
     | name | truthy | numeric |
     | test | False  | 42      |
+    When I make an API "GET" request to "/dynamic/simple/?filter{name}=test" with data
+    Then status code "200" is returned
+    And values exist in "simple_models" in the response
+    | name | truthy | numeric |
+    | test | False  | 42      |
     Given a "RelatedModel" model is available
     And the request data is reset
     And the request has "simple" with "3"
