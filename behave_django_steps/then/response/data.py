@@ -30,7 +30,16 @@ def response_values_exist_at_key(context, response_key):
                 found = False
                 for item in data:
                     response_value = item.get(key)
-                    if response_value == value:
+                    response_type = type(response_value)
+                    temp_value = value
+                    if not isinstance(temp_value, response_type):
+                        if response_type == bool:
+                            temp_value = temp_value == "True"
+                        elif response_type is type(None):
+                            temp_value = None if temp_value in ["", "None"] else temp_value
+                        elif response_type != dict:
+                            temp_value = type(response_value)(temp_value)
+                    if response_value == temp_value:
                         found = True
                         break
                 context.test.assertTrue(found)
