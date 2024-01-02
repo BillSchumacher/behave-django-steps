@@ -18,7 +18,10 @@ def response_status_code_is(context, status_code):
     print(context.response)
     if hasattr(context.response, "data"):
         if not isinstance(context.response, JsonResponse):
-            context.response.data = json.loads(context.response.content)
+            try:
+                context.response.data = json.loads(context.response.content)
+            except json.decoder.JSONDecodeError:
+                context.response.data = None
         print(context.response.data)
         print(context.response.content)
     context.test.assertEqual(context.response.status_code, int(status_code))
