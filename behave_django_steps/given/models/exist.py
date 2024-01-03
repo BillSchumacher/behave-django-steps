@@ -15,7 +15,8 @@ def models_are_available(context):
     models_excluding_user = []
     for model in models:
         # pylint: disable-next=protected-access
-        if model._meta.model_name.lower() == 'user' or model._meta.object_name.lower() == 'user':
+        if (model._meta.model_name.lower() == 'user' or
+                model._meta.object_name.lower() == 'user'):
             continue
         models_excluding_user.append(model)
     models_excluding_user.append(get_user_model())
