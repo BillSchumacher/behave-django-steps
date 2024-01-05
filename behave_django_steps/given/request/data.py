@@ -49,3 +49,15 @@ def request_has_values_in_key(context, key):
 def request_data_is_reset(context) -> None:
     """Reset request data."""
     context.request_data = {}
+
+
+@given('the request has "{key}" a num list "{value}"')
+def request_has_key_with_numeric_list_value(context, key, value):
+    """Add a key with a value to the request data."""
+    context.execute_steps("Given request data is available")
+    value = [
+        float(v) if "." in v else int(v)
+        for v in value.split(",")
+        if value.strip() != ""
+    ]
+    context.request_data[key] = value

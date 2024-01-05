@@ -53,6 +53,13 @@ def response_values_exist_at_key(context, response_key):
                         value = value == "True"
                     elif response_type is type(None):
                         value = None if value in ["", "None"] else value
+                    elif response_type == list:
+                        if isinstance(response_value[0], str):
+                            value = [str(v) for v in value.split(",")]
+                        elif isinstance(response_value[0], float):
+                            value = [float(v) for v in value.split(",")]
+                        elif isinstance(response_value[0], int):
+                            value = [int(v) for v in value.split(",")]
                     elif response_type != dict:
                         value = type(response_value)(value)
                 context.test.assertEqual(
