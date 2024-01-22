@@ -48,9 +48,15 @@ def make_api_request(context, method, url):
 def make_api_request_with_data(context, method, url):
     """Make an API request with data."""
     context.execute_steps("Given api client is available")
+    if method == "DELETE":
+        request_data = context.request_data
+        if isinstance(request_data, dict):
+            request_data = [request_data]
+    else:
+        request_data = context.request_data
     context.response = getattr(context.test.api_client, method.lower())(
         url,
-        data=context.request_data,
+        data=request_data,
         format="json",
         headers=context.headers if hasattr(context, "headers") else None,
     )
