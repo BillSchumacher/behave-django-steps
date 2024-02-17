@@ -13,8 +13,19 @@ def response_values_exist(context):
             if isinstance(response_value, list):
                 context.test.assertIn(value, response_value)
             else:
+                response_type = type(response_value)
+                temp_value = value
+                if not isinstance(temp_value, response_type):
+                    if response_type == bool:
+                        temp_value = temp_value == "True"
+                    elif response_type is type(None):
+                        temp_value = (
+                            None if temp_value in ["", "None"] else temp_value
+                        )
+                    elif response_type != dict:
+                        temp_value = type(response_value)(temp_value)
                 context.test.assertEqual(
-                    response_value, value, f"Key: {key}, Value: {value}"
+                    response_value, temp_value, f"Key: {key}, Value: {temp_value}"
                 )
 
 
