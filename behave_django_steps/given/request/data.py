@@ -34,7 +34,10 @@ def request_has_key_with_boolean_value(context, key, value):
 def request_has_key_with_numeric_value(context, key, value):
     """Add a key with a value to the request data."""
     context.execute_steps("Given request data is available")
-    value = float(value) if "." in value else int(value)
+    if value is None or value == "":
+        value = None
+    else:
+        value = float(value) if "." in value else int(value)
     context.request_data[key] = value
 
 
