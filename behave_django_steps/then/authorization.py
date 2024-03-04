@@ -1,5 +1,8 @@
 """Steps for testing authorization."""
+import json
+
 from behave import then
+from behave.runner import Context
 from django.contrib.auth.models import Group
 
 
@@ -103,3 +106,30 @@ def inherit_permissions_from_role(context, dest_role, source_role):
         context.test.assertTrue(
             dest_group.permissions.filter(pk=permission.pk).exists()
         )
+
+
+@then("clean default permissions")
+def then_clean_default_permissions(context: Context) -> None:
+    """Removes default permissions created by django.
+
+    Keeps permissions that start with "can_".
+
+    This solves the problem of loading permissions after django has created them.
+
+    Args:
+        context (behave.runner.Context): The behave context.
+
+    Returns:
+        None
+    """
+    exception_raised = False
+    try:
+        with open("fixtures/Permission.json", "r", encoding="utf-8") as f:
+            content = f.read()
+        with open("fixtures/Permission.json", "w", encoding="utf-8") as f:
+            data = json.loads(content)
+            data = [x for x in data if x["fields"]["codename"].startswith("can_")]
+            f.write(json.dumps(data, indent=2))
+    except:  # noqa: E722 pylint: disable=bare-except pragma: no cover
+        exception_raised = True  # pragma: no cover
+    context.test.assertFalse(exception_raised)
