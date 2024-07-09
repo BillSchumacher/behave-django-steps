@@ -17,3 +17,18 @@ Feature: Django models support
     And a "User" with values does not exist
       | username |
       | bob      |
+  
+  Scenario: Set a known model fields
+    Given a "User" model is available
+    And a "User" with values
+      | username | password  |
+      | test     | test      |
+    And context "User" values set to
+      | username |
+      | evlampiy |
+    Then a "User" with values exists
+      | username |
+      | evlampiy |
+    And a "User" with values does not exist
+      | username |
+      | test     |
