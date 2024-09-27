@@ -25,6 +25,8 @@ def set_model_fields_values(context: Context, model_name: str) -> None:
     values = context.table[0].as_dict()
 
     for key, value in values.items():
+        if value is None or value == "" or value == '""':
+            value = None
         setattr(obj, key, value)
 
     obj.save()
